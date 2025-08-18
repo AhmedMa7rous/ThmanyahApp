@@ -31,7 +31,7 @@ actor NetworkService: NetworkServiceProtocol {
             try validateResponse(httpResponse)
             
             let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            decoder.keyDecodingStrategy = .useDefaultKeys
             decoder.dateDecodingStrategy = .iso8601
             
             do {

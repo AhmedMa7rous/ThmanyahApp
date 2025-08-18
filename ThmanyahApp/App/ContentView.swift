@@ -8,14 +8,79 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var homeViewModel: HomeViewModel
+    @StateObject private var searchViewModel: SearchViewModel
+    @State private var showSearch = false
+    
+    init() {
+        // Dependency injection setup
+        let networkService = NetworkService()
+        let repository = ContentRepository(networkService: networkService)
+        let fetchUseCase = FetchHomeSectionsUseCase(repository: repository)
+        let searchUseCase = SearchContentUseCase(repository: repository)
+        
+        _homeViewModel = StateObject(wrappedValue: HomeViewModel(fetchHomeSectionsUseCase: fetchUseCase))
+        _searchViewModel = StateObject(wrappedValue: SearchViewModel(searchContentUseCase: searchUseCase))
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                if showSearch {
+                    SearchView(viewModel: searchViewModel)
+                        .onDisappear {
+                            searchViewModel.clearSearch()
+                        }
+                } else {
+                    HomeView(viewModel: homeViewModel)
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: toggleSearch) {
+                        Image(systemName: showSearch ? "xmark" : "magnifyingglass")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .medium))
+                    }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text("الطائر")
+                        .font(.custom(FontNames.IBMPlexSansArabicBold, size: 20))
+                        .foregroundColor(.white)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack(spacing: 15) {
+                        Button(action: {}) {
+                            Image(systemName: "bell")
+                                .foregroundColor(.white)
+                                .font(.system(size: 18, weight: .medium))
+                        }
+                        
+                        Button(action: {}) {
+                            Image(systemName: "person.circle")
+                                .foregroundColor(.white)
+                                .font(.system(size: 18, weight: .medium))
+                        }
+                    }
+                }
+            }
         }
-        .padding()
+        .preferredColorScheme(.dark)
+    }
+    
+    private func toggleSearch() {
+        withAnimation(.easeInOut(duration: 0.3)) {
+            showSearch.toggle()
+        }
+        
+        if !showSearch {
+            searchViewModel.clearSearch()
+        }
     }
 }
 

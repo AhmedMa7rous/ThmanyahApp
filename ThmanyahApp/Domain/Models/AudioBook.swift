@@ -20,17 +20,15 @@ struct AudioBook: ContentProtocol, Codable {
     
     var contentType: ContentType { .audioBook }
     
-    var formattedDuration: String {
-        let hours = duration / 3600
-        let minutes = (duration % 3600) / 60
-        if hours > 0 {
-            return "\(hours)س \(minutes)د"
-        } else {
-            return "\(minutes)د"
-        }
-    }
-    
     var authorText: String {
         return "بقلم \(authorName)"
+    }
+    
+    var subtitle: String {
+        return authorText
+    }
+    
+    var metadata: String {
+        return formattedDuration
     }
 }
