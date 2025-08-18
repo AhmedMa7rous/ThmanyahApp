@@ -46,10 +46,11 @@ final class SearchViewModel: ObservableObject {
         }
     }
     
-    private func performSearch(query: String) async {
+    func performSearch(query: String) async {
         isSearching = true
         error = nil
         hasSearched = true
+        defer { isSearching = false }
         
         do {
             let result = try await searchContentUseCase.execute(
@@ -66,6 +67,8 @@ final class SearchViewModel: ObservableObject {
             
             print("✅ Search completed for '\(query)': \(sections.count) sections found")
             
+        } catch is CancellationError {
+            return
         } catch let networkError as NetworkError {
             self.error = networkError
             sections = []

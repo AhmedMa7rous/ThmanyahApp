@@ -44,6 +44,17 @@ actor NetworkService: NetworkServiceProtocol {
                 throw NetworkError.decodingError(errorDetails)
             }
             
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch let urlError as URLError {
+            switch urlError.code {
+            case .cancelled:
+                throw CancellationError()
+            case .timedOut:
+                throw NetworkError.timeout
+            default:
+                throw NetworkError.networkError(urlError.localizedDescription)
+            }
         } catch let error as NetworkError {
             throw error
         } catch {
