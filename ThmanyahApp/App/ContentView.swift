@@ -48,7 +48,7 @@ struct ContentView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text("الطائر")
+                    Text("مساء الخير")
                         .font(.custom(FontNames.IBMPlexSansArabicBold, size: 20))
                         .foregroundColor(.white)
                 }

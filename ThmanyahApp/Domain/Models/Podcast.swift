@@ -13,7 +13,7 @@ struct Podcast: ContentProtocol, Codable {
     let description: String
     let avatarUrl: String
     let episodeCount: Int
-    let duration: Int
+    var duration: Int
     let language: String
     let priority: Int
     let popularityScore: Int

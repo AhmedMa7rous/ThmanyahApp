@@ -24,7 +24,7 @@ enum APIEndpoint {
             var components = URLComponents(string: APIConstants.searchBaseURL + APIConstants.Endpoints.search)!
             let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             components.queryItems = [
-                URLQueryItem(name: "q", value: encodedQuery),
+                URLQueryItem(name: "q", value: query),
                 URLQueryItem(name: "page", value: "\(page)"),
                 URLQueryItem(name: "limit", value: "\(limit)")
             ]
