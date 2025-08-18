@@ -61,8 +61,8 @@ final class ContentMapper {
             description: searchContent.description,
             episodeCount: searchContent.episodeCount.flatMap { Int($0) },
             language: searchContent.language,
-            priority: searchContent.priority,
-            popularityScore: searchContent.popularityScore,
+            priority: searchContent.priority.flatMap { Int($0) },
+            popularityScore: searchContent.popularityScore.flatMap { Int($0) },
             episodeId: searchContent.episodeId,
             podcastName: searchContent.podcastName,
             audioUrl: searchContent.audioUrl,
@@ -89,8 +89,8 @@ final class ContentMapper {
             episodeCount: dto.episodeCount ?? 0,
             duration: dto.duration ?? 0,
             language: dto.language ?? "",
-            priority: dto.priority ?? "",
-            popularityScore: dto.popularityScore ?? "",
+            priority: dto.priority ?? 0,
+            popularityScore: dto.popularityScore ?? 0,
             score: dto.score ?? 0
         )
     }

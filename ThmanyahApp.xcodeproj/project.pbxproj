@@ -30,10 +30,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4BE053322E52762C00415478 /* Exceptions for "ThmanyahApp" folder in "ThmanyahApp" target */ = {
+		4BE054A42E5299B600415478 /* Exceptions for "ThmanyahApp" folder in "ThmanyahApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				App/Info.plist,
+				Info.plist,
 			);
 			target = 4BC193432E4E350A00241E9E /* ThmanyahApp */;
 		};
@@ -43,7 +43,7 @@
 		4BC193462E4E350A00241E9E /* ThmanyahApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				4BE053322E52762C00415478 /* Exceptions for "ThmanyahApp" folder in "ThmanyahApp" target */,
+				4BE054A42E5299B600415478 /* Exceptions for "ThmanyahApp" folder in "ThmanyahApp" target */,
 			);
 			path = ThmanyahApp;
 			sourceTree = "<group>";

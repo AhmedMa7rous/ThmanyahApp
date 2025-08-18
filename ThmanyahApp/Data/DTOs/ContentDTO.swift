@@ -19,8 +19,8 @@ struct ContentDTO: Codable {
     let description: String?
     let episodeCount: Int?
     let language: String?
-    let priority: String?
-    let popularityScore: String?
+    let priority: Int?
+    let popularityScore: Int?
     
     // Episode
     let episodeId: String?
